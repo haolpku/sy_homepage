@@ -1,49 +1,656 @@
 <!doctype html>
 <html lang="zh-CN">
 <head>
-  <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>DataVerse · 让数据成为智能的起点</title>
-  <meta name="description" content="DataVerse，上海数元衍宇智能科技有限公司。以数据为中心，探索下一代人工智能。">
-  <meta property="og:title" content="DataVerse · 数据驱动智能"><meta property="og:description" content="Better data. Greater intelligence. 以数据为中心，探索下一代人工智能。"><meta property="og:type" content="website">
-  <meta name="theme-color" content="#ffffff">
-  <link rel="icon" href="assets/mark.svg" type="image/svg+xml"><link rel="stylesheet" href="styles.css">
-  <script src="content.js" defer></script><script src="datasets-copy.js" defer></script><script src="app.js" defer></script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>DataVerse Hero Concept</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #07090b;
+      --ink: #f2f3ef;
+      --muted: #929ba4;
+      --line: rgba(186, 204, 218, .2);
+      --blue: #7f9bb0;
+      --accent: #e16b49;
+      --sans: "Helvetica Neue", Arial, "PingFang SC", "Microsoft YaHei", sans-serif;
+      --mono: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { margin: 0; background: var(--bg); color: var(--ink); font-family: var(--sans); }
+    a { color: inherit; text-decoration: none; }
+    button, a { -webkit-tap-highlight-color: transparent; }
+    a:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outline-offset: 5px; }
+
+    .hero {
+      position: relative;
+      min-height: 100svh;
+      overflow: hidden;
+      isolation: isolate;
+      background:
+        radial-gradient(circle at 79% 52%, rgba(49, 75, 91, .18), transparent 32%),
+        var(--bg);
+    }
+
+    .nav {
+      position: relative;
+      z-index: 10;
+      width: calc(100% - 36px);
+      height: 76px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: max-content 1fr auto;
+      align-items: center;
+    }
+
+    .brand { display: inline-flex; align-items: center; gap: 9px; font-size: 20px; font-weight: 560; }
+    .brand-mark { width: 20px; height: 20px; display: grid; grid-template-columns: 1fr 1fr; gap: 2px; }
+    .brand-mark i { display: block; background: currentColor; }
+    .brand-mark i:last-child { background: var(--accent); }
+    .brand-dot { color: var(--accent); }
+    .nav-links { display: flex; align-items: center; gap: 38px; margin-left: 38px; color: #b3b8bd; font-size: 13px; }
+    .nav-links a { transition: color .2s ease; }
+    .nav-links a:hover { color: var(--ink); }
+    .nav-actions { justify-self: end; display: flex; align-items: center; gap: 13px; }
+    .lang { color: #8d959d; font: 10px var(--mono); }
+    .contact-link { border: 1px solid rgba(255,255,255,.24); padding: 11px 18px; font-size: 12px; transition: .2s ease; }
+    .contact-link:hover { background: var(--ink); color: var(--bg); }
+
+    .hero-inner {
+      position: relative;
+      z-index: 3;
+      width: 100%;
+      min-height: calc(100svh - 72px);
+      margin: 0 auto;
+    }
+
+    .copy { position: absolute; z-index: 4; left: calc(18px + 136px + 38px); top: 31%; width: min(560px, 40vw); }
+    .eyebrow { margin: 0 0 49px; color: #77828b; font: 10px var(--mono); letter-spacing: .7px; }
+    .eyebrow::before { content: ""; display: inline-block; width: 5px; height: 5px; margin: 0 9px 1px 0; background: var(--accent); }
+    h1 { margin: 0; font-size: clamp(36px, 2.65vw, 48px); line-height: 1.34; font-weight: 430; letter-spacing: 0; }
+    h1 span { display: block; }
+    .hero-tagline { margin: 16px 0 0; color: #e2e5e4; font-size: 16px; font-weight: 400; }
+    .lead { max-width: 560px; margin: 25px 0 0; color: #969fa7; font-size: 13px; line-height: 1.85; text-wrap: pretty; }
+    .lead span { display: block; margin-top: 5px; color: #7d878e; }
+    .actions { display: flex; align-items: center; gap: 24px; margin-top: 35px; }
+    .primary { display: inline-flex; align-items: center; justify-content: space-between; gap: 36px; min-width: 204px; padding: 14px 17px; background: var(--accent); color: #160c08; font-size: 12px; font-weight: 600; transition: transform .2s ease, background .2s ease; }
+    .primary:hover { transform: translateY(-2px); background: #f07b58; }
+
+    .universe {
+      position: absolute;
+      z-index: 1;
+      top: 54%;
+      right: 2.5%;
+      width: min(75vw, 1040px);
+      aspect-ratio: 1;
+      transform: translateY(-49%);
+      pointer-events: none;
+      opacity: 0;
+      animation: universe-in 1.8s .15s cubic-bezier(.2,.75,.2,1) forwards;
+    }
+
+    .universe::after {
+      content: "";
+      position: absolute;
+      inset: 28%;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(215,232,241,.06), transparent 67%);
+      filter: blur(20px);
+    }
+
+    #universe-svg { width: 100%; height: 100%; overflow: visible; }
+    .orbit { fill: none; stroke: #40505b; stroke-width: .7; opacity: .45; transform-origin: 500px 500px; }
+    .orbit-a { animation: spin 82s linear infinite; }
+    .orbit-b { animation: spin-reverse 64s linear infinite; }
+    .orbit-c { animation: spin 105s linear infinite; }
+    .network-line { stroke: #8295a3; stroke-width: .65; opacity: 0; animation: line-in 1.4s ease forwards; }
+    .node { fill: var(--blue); }
+    .node.hot { fill: var(--accent); filter: drop-shadow(0 0 5px rgba(225,107,73,.42)); }
+    .node.pulse { animation: pulse 6s ease-in-out infinite; transform-box: fill-box; transform-origin: center; }
+
+    .figure-label { position: absolute; z-index: 5; color: #68737b; font: 9px var(--mono); letter-spacing: .9px; }
+    .figure-label::after { content: ""; display: block; width: 48px; height: 1px; margin-top: 8px; background: #53616a; }
+    .raw { right: 43%; top: 23%; }
+    .possibility { right: 5.5%; bottom: 13%; }
+    .possibility::after { margin-left: auto; }
+
+    .figure-caption {
+      position: absolute;
+      z-index: 5;
+      right: 4.5%;
+      bottom: 3.5%;
+      width: min(42vw, 700px);
+      display: flex;
+      justify-content: space-between;
+      color: #59646c;
+      font: 8px var(--mono);
+      letter-spacing: .8px;
+    }
+
+    .scroll-cue { position: absolute; z-index: 5; left: 22px; bottom: 35px; display: flex; align-items: center; gap: 12px; color: #5f6971; font: 8px var(--mono); letter-spacing: .8px; transform: rotate(-90deg); transform-origin: left center; }
+    .scroll-cue::before { content: ""; width: 42px; height: 1px; background: #45515a; }
+
+    .next {
+      min-height: 58vh;
+      background: #f5f5f2;
+      color: #192027;
+      padding: 78px max(40px, calc((100% - 1360px)/2));
+    }
+    .next-index { color: #7d858a; font: 10px var(--mono); letter-spacing: 1px; }
+    .next h2 { margin: 22px 0 0; max-width: 760px; font-size: clamp(36px, 4vw, 58px); line-height: 1.22; font-weight: 450; letter-spacing: 0; }
+    .section-intro { max-width: 650px; margin: 22px 0 0; color: #68727a; font-size: 14px; line-height: 1.85; }
+    .paths { margin-top: 72px; border-top: 1px solid #d9dcdd; }
+    .path { display: grid; grid-template-columns: 70px 1fr 1.15fr 30px; gap: 28px; align-items: center; padding: 25px 0; border-bottom: 1px solid #d9dcdd; }
+    .path span { color: #858d91; font: 10px var(--mono); }
+    .path strong { font-size: 18px; font-weight: 500; }
+    .path p { margin: 0; max-width: 470px; color: #69737a; font-size: 13px; line-height: 1.7; }
+    .path b { color: var(--accent); font: 18px var(--mono); text-align: right; }
+
+    .content-section { padding: 96px max(40px, calc((100% - 1360px)/2)); }
+    .content-section h2 { margin: 22px 0 0; max-width: 830px; font-size: clamp(36px, 4vw, 58px); line-height: 1.22; font-weight: 450; }
+    .section-light { background: #fff; color: #192027; }
+    .section-soft { background: #f2f3f1; color: #192027; }
+    .section-dark { background: #0b0e11; color: #edf0ee; }
+    .section-dark .next-index, .section-dark .section-intro { color: #7e8991; }
+
+    .data-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; margin-top: 58px; }
+    .data-card { min-height: 330px; display: flex; flex-direction: column; padding: 27px; border: 1px solid #dde1e2; background: #fafaf8; }
+    .card-number { color: #90989c; font: 9px var(--mono); }
+    .data-card h3 { margin: 19px 0 9px; font-size: 21px; font-weight: 500; }
+    .data-card p { margin: 0; max-width: 470px; color: #69737a; font-size: 13px; line-height: 1.75; }
+    .card-visual { position: relative; flex: 1; min-height: 145px; margin-top: 28px; overflow: hidden; border-top: 1px solid #dde1e2; }
+    .visual-label { position: absolute; color: #8b9499; font: 8px var(--mono); letter-spacing: .5px; }
+    .visual-line { position: absolute; height: 1px; background: #bfc7cb; transform-origin: left; }
+    .visual-dot { position: absolute; width: 7px; height: 7px; background: #8799a5; }
+    .visual-dot.hot { background: var(--accent); }
+    .compare-pane { position: absolute; top: 22px; bottom: 5px; width: 47%; border: 1px solid #cfd5d8; background: repeating-linear-gradient(135deg,#eef0ef 0,#eef0ef 10px,#e4e7e6 10px,#e4e7e6 11px); }
+    .compare-pane:first-child { left: 0; }
+    .compare-pane:nth-child(2) { right: 0; background: repeating-linear-gradient(45deg,#f5eee9 0,#f5eee9 10px,#ecdcd3 10px,#ecdcd3 11px); }
+    .compare-divider { position: absolute; left: 50%; top: 14px; bottom: 0; width: 1px; background: var(--accent); }
+    .query-code { position: absolute; inset: 25px 0 0; padding: 17px; background: #1a2025; color: #a9bac4; font: 9px/1.8 var(--mono); }
+    .query-code strong { color: #e68a6e; font-weight: 400; }
+    .code-bars { position: absolute; inset: 27px 0 0; display: grid; align-content: center; gap: 9px; }
+    .code-bars i { display: block; height: 5px; background: #cad1d4; }
+    .code-bars i:nth-child(1) { width: 72%; }.code-bars i:nth-child(2) { width: 48%; }.code-bars i:nth-child(3) { width: 84%; background: #e0a18d; }.code-bars i:nth-child(4) { width: 61%; }.code-bars i:nth-child(5) { width: 77%; }
+    .trace { position: absolute; inset: 24px 0 0; display: grid; grid-template-columns: 18px 1fr; align-content: center; gap: 12px 14px; color: #7a858b; font: 9px var(--mono); }
+    .trace i { width: 8px; height: 8px; margin-top: 1px; background: #98a8b1; box-shadow: 0 26px 0 #98a8b1, 0 52px 0 var(--accent), 0 78px 0 #98a8b1; }
+    .trace span { border-bottom: 1px solid #dce0e1; padding-bottom: 7px; }
+    .benchmark-visual { display: flex; align-items: flex-end; gap: 14px; padding: 24px 20px 7px; }
+    .benchmark-visual i { position: relative; z-index: 1; display: block; width: 17%; height: var(--h); background: #aab6bc; }
+    .benchmark-visual i.hot { background: var(--accent); }
+    .benchmark-axis { position: absolute; inset: 28px 0 7px; background: repeating-linear-gradient(to bottom, transparent 0, transparent calc(33.333% - 1px), #e0e3e4 calc(33.333% - 1px), #e0e3e4 33.333%); }
+    .section-actions { display: flex; gap: 28px; margin-top: 32px; }
+    .section-actions a { padding-bottom: 6px; border-bottom: 1px solid #9ea6aa; font-size: 12px; }
+    .section-actions a:hover { color: var(--accent); border-color: var(--accent); }
+
+    .open-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1px; margin-top: 58px; background: #242b30; border: 1px solid #242b30; }
+    .open-group { min-height: 430px; padding: 28px; background: #0b0e11; }
+    .open-group h3 { margin: 18px 0 10px; font-size: 22px; font-weight: 500; }
+    .open-group > p { margin: 0; color: #7e8991; font-size: 12px; line-height: 1.7; }
+    .project-list { margin-top: 42px; border-top: 1px solid #283037; }
+    .project { display: block; padding: 18px 0; border-bottom: 1px solid #283037; }
+    .project strong { display: flex; justify-content: space-between; gap: 20px; font-size: 14px; font-weight: 500; }
+    .project strong span { color: var(--accent); }
+    .project small { display: block; margin-top: 8px; color: #747f86; font-size: 10px; line-height: 1.6; }
+
+    .team-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; margin-top: 58px; border-top: 1px solid #d9ddde; padding-top: 30px; }
+    .person-row { display: grid; grid-template-columns: 96px 1fr; gap: 24px; }
+    .person-visual { width: 96px; aspect-ratio: 1; display: grid; place-items: center; background: #192027; color: white; font: 22px var(--mono); }
+    .person-row h3 { margin: 0 0 10px; font-size: 21px; font-weight: 500; }
+    .person-row p { margin: 0; color: #69737a; font-size: 12px; line-height: 1.8; }
+    .person-row a { display: inline-block; margin-top: 16px; padding-bottom: 4px; border-bottom: 1px solid #9da5a8; font-size: 11px; }
+
+    .work-list { margin-top: 58px; border-top: 1px solid #d5d9da; }
+    .work-link { display: grid; grid-template-columns: 60px 1fr auto 30px; gap: 25px; align-items: center; min-height: 92px; border-bottom: 1px solid #d5d9da; transition: background .2s ease, padding .2s ease; }
+    .work-link:hover { background: #192027; color: #f4f5f2; padding-inline: 18px; }
+    .work-link span { color: #8a9296; font: 10px var(--mono); }
+    .work-link strong { font: 12px var(--mono); font-weight: 500; letter-spacing: .5px; }
+    .work-link em { font-size: 13px; font-style: normal; }
+    .work-link b { color: var(--accent); font-size: 20px; font-weight: 400; }
+
+    .footer { padding: 64px max(40px, calc((100% - 1360px)/2)) 30px; background: #080a0c; color: #e9ece9; }
+    .footer-main { display: grid; grid-template-columns: 1.5fr repeat(4, 1fr); gap: 48px; padding-bottom: 64px; }
+    .footer-brand { align-self: start; }
+    .footer-brand .brand { font-size: 21px; }
+    .footer-brand p { max-width: 250px; margin: 18px 0 0; color: #737d84; font-size: 11px; line-height: 1.75; }
+    .footer-column h3 { margin: 0 0 22px; color: #737d84; font: 9px var(--mono); letter-spacing: .7px; }
+    .footer-column a { display: block; width: fit-content; margin: 0 0 14px; color: #b5bcc0; font-size: 12px; transition: color .2s ease; }
+    .footer-column a:hover { color: var(--accent); }
+    .footer-column .footer-link { display: block; width: fit-content; margin: 0 0 14px; color: #b5bcc0; font-size: 12px; }
+    .footer-bottom { display: flex; justify-content: space-between; gap: 30px; padding-top: 24px; border-top: 1px solid #22282d; color: #5f686e; font: 8px/1.7 var(--mono); letter-spacing: .4px; }
+
+    @keyframes universe-in { from { opacity: 0; transform: translateY(-46%) scale(.93); } to { opacity: 1; transform: translateY(-49%) scale(1); } }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    @keyframes spin-reverse { to { transform: rotate(-360deg); } }
+    @keyframes line-in { to { opacity: .2; } }
+    @keyframes pulse { 0%,100% { opacity: .45; transform: scale(.85); } 50% { opacity: 1; transform: scale(1.35); } }
+
+    @media (max-width: 900px) {
+      .nav { width: calc(100% - 40px); grid-template-columns: 1fr auto; }
+      .nav-links { display: none; }
+      .contact-link { display: none; }
+      .hero-inner { width: calc(100% - 40px); min-height: calc(100svh - 72px); }
+      .copy { left: 0; top: 10vh; width: min(580px, 100%); }
+      h1 { font-size: clamp(36px, 8vw, 48px); line-height: 1.38; }
+      .lead { max-width: 370px; font-size: 14px; line-height: 1.75; }
+      .universe { width: 94vh; min-width: 690px; top: 78%; right: -52%; opacity: .76; }
+      .raw, .possibility, .figure-caption { display: none; }
+      .scroll-cue { left: 20px; bottom: 15px; }
+      .next { padding: 58px 20px; }
+      .content-section { padding: 68px 20px; }
+      .path { grid-template-columns: 32px 1fr 20px; gap: 14px; align-items: start; }
+      .path p { grid-column: 2; grid-row: 2; }
+      .path b { grid-column: 3; grid-row: 1; }
+      .data-grid, .open-grid, .team-grid { grid-template-columns: 1fr; }
+      .open-group { min-height: auto; }
+      .work-link { grid-template-columns: 30px 1fr 20px; gap: 14px; padding-block: 20px; }
+      .work-link em { grid-column: 2; grid-row: 2; }
+      .work-link b { grid-column: 3; grid-row: 1; }
+      .footer { padding: 52px 20px 26px; }
+      .footer-main { grid-template-columns: 1fr 1fr; gap: 42px 30px; }
+      .footer-brand { grid-column: 1 / -1; }
+      .footer-bottom { display: block; }
+      .footer-bottom span:last-child { display: block; margin-top: 8px; }
+    }
+
+    @media (max-width: 520px) {
+      .hero { min-height: 100svh; }
+      .hero-inner { min-height: calc(100svh - 72px); padding-top: 8vh; }
+      .eyebrow { margin-bottom: 20px; font-size: 8px; }
+      h1 { font-size: 34px; }
+      .lead { max-width: 320px; }
+      .actions { gap: 20px; flex-wrap: wrap; }
+      .universe { top: 80%; right: -93%; min-width: 650px; }
+      .next h2 { font-size: 36px; }
+      .content-section h2 { font-size: 36px; }
+      .data-card { min-height: 300px; }
+      .person-row { grid-template-columns: 74px 1fr; }
+      .person-visual { width: 74px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after { animation: none !important; transition: none !important; }
+      .universe { opacity: 1; transform: translateY(-48%); }
+      .network-line { opacity: .2; }
+    }
+
+    /* Airy editorial sections, with DataVerse's orbital visual language. */
+    .next, .content-section { padding: 100px max(32px, calc((100% - 1120px)/2)); min-height: auto; background: #fafbf9; color: #202a30; }
+    .content-section:nth-of-type(odd) { background: #fff; }
+    .section-heading { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start; }
+    .next h2, .content-section h2 { margin: 0; max-width: 470px; font-size: clamp(28px, 2.8vw, 38px); line-height: 1.45; font-weight: 450; letter-spacing: -.8px; text-wrap: balance; }
+    .section-intro, .section-dark .section-intro { text-wrap: pretty; margin: 2px 0 0; color: #778188; font-size: 13px; line-height: 1.95; max-width: 460px; }
+    .accent-word { color: var(--accent); }
+    h1 .accent-word { display: inline; }
+    .copy h1 .accent-word { color: #f4f5f2; }
+    /* Keep every section after the hero on one white canvas. */
+    .next, .content-section, .section-light, .section-soft, .section-dark { background: #fff; color: #202a30; }
+    .section-dark .next-index, .section-dark .section-intro { color: #778188; }
+    .section-dark .open-group { background: transparent; }
+    .section-dark .project strong { color: #26353e; }
+    .section-dark .project small, .section-dark .open-group > p { color: #778188; }
+    .section-dark .project strong span { background: #edf1f2; color: #6e828f; }
+    .section-dark .project:hover strong span { background: #f7e4dc; color: #c85837; }
+    .section-dark .path + .path, .section-dark .data-card + .data-card, .section-dark .open-group + .open-group { border-color: #e3e7e7; }
+    .primary, .section-actions a:first-child { border-radius: 8px; background: var(--accent); }
+    .primary:hover, .section-actions a:first-child:hover { background: #f07b58; }
+    .section-actions a:not(:first-child) { border: 1px solid #d8dfe2; background: #fff; border-radius: 8px; color: #425763; }
+    .section-heading { display: flex; flex-direction: column; align-items: center; gap: 22px; text-align: center; }
+    .section-heading h2 { max-width: 860px; }
+    .section-heading > div { width: 100%; }
+    .section-heading .section-intro { max-width: 760px; margin: 0 auto; }
+    #data-in-practice .section-heading h2, #data-in-practice .section-heading > div { grid-column: auto; grid-row: auto; justify-self: auto; text-align: center; }
+    .motif, .data-card .motif { width: 110px; height: 80px; padding: 0; border-radius: 0; background: transparent; }
+    .data-card .motif { width: 150px; height: 100px; }
+    /* Editorial card treatment for the white content chapters. */
+    .paths, .data-grid, .open-grid { gap: 18px; }
+    .path, .data-card, .open-group { min-height: 270px; padding: 28px; border: 1px solid #e0e4e5; border-radius: 14px; background: #fff; }
+    .path:first-child, .data-card:first-child, .open-group:first-child,
+    .path:last-child, .data-card:last-child, .open-group:last-child { padding-left: 28px; padding-right: 28px; }
+    .path + .path, .data-card + .data-card, .open-group + .open-group { border-left: 1px solid #e0e4e5; }
+    .motif, .data-card .motif { width: 64px; height: 64px; padding: 12px; box-sizing: border-box; border-radius: 9px; background: #f8e2da; }
+    .path strong, .data-card h3, .open-group h3 { margin-top: 24px; color: #171d21; font-size: 18px; }
+    .path p, .data-card p, .open-group > p { color: #737c82; }
+    .open-group { min-height: 410px; }
+    .open-group > p { min-height: 48px; margin-bottom: 0; }
+    .open-group .project-list { margin-top: 22px; }
+    .open-group .project { min-height: 88px; box-sizing: border-box; }
+    .project-list { margin-top: 22px; }
+    .primary span { display: grid; place-items: center; width: 24px; height: 24px; border-radius: 5px; background: #171d21; color: #fff; }
+    .paths, .data-grid, .open-grid { display: grid; margin-top: 64px; gap: 0; border: 0; background: transparent; }
+    .open-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .paths { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .path, .data-card, .open-group { display: flex; flex-direction: column; align-items: flex-start; padding: 16px 40px; min-height: auto; border: 0; background: transparent; }
+    .path:first-child, .data-card:first-child, .open-group:first-child { padding-left: 0; }
+    .path:last-child, .data-card:last-child, .open-group:last-child { padding-right: 0; }
+    .path + .path, .data-card + .data-card, .open-group + .open-group { border-left: 1px solid #e3e7e7; }
+    .path > span, .path > b, .card-number { display: none; }
+    .path strong, .data-card h3, .open-group h3 { margin: 20px 0 10px; font-size: 19px; font-weight: 500; }
+    .path p, .data-card p, .open-group > p { color: #778188; font-size: 13px; line-height: 1.85; max-width: 360px; }
+    .motif { width: 110px; height: 80px; color: #8296a3; overflow: visible; flex-shrink: 0; }
+    .motif .accent { stroke: #e16b49; }
+    .motif .fill { fill: #e16b49; stroke: none; }
+    .data-card .card-visual { order: -1; width: 100%; min-height: 100px; flex: none; margin: 0 0 10px; border: 0; overflow: visible; }
+    .data-card .motif { width: 150px; height: 100px; }
+    .data-card h3 { margin-top: 12px; }
+    .section-actions { margin-top: 26px; gap: 12px; flex-wrap: wrap; }
+    .section-actions a, .person-row a { display: inline-flex; align-items: center; gap: 18px; padding: 10px 18px; border: 0; border-radius: 999px; background: #e9eef0; color: #425763; font-size: 12px; transition: background .2s; }
+    .section-actions a:first-child { background: #e16b49; color: #fff; }
+    .section-actions a:hover, .person-row a:hover { background: #d7e0e5; color: #24343f; }
+    a:focus-visible { outline: 2px solid #e16b49; outline-offset: 5px; }
+    .open-group { padding-top: 0; }
+    .project-list { width: 100%; margin-top: 28px; border: 0; }
+    .project { padding: 17px 0; border: 0; }
+    .project strong { align-items: center; color: #26353e; font-size: 16px; }
+    .project strong span { width: 28px; height: 28px; display: grid; place-items: center; border-radius: 50%; background: #edf0f1; color: #6e828f; }
+    .project:hover strong span { background: #f7e4dc; color: #c85837; }
+    .project small { color: #778188; font-size: 12px; margin-top: 5px; }
+    .team-grid { margin-top: 64px; padding-top: 36px; border-color: #e3e7e7; }
+    .person-visual { border-radius: 50%; background: #e9eef0; color: #6f8491; font-size: 19px; }
+    .person-visual.photo { overflow: hidden; }
+    .person-visual.photo img { width: 100%; height: 100%; object-fit: cover; object-position: center top; }
+    .person-row h3 { font-size: 19px; }
+    .work-list { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; border: 0; margin-top: 58px; }
+    .work-link { position: relative; display: flex; flex-direction: column; align-items: flex-start; gap: 15px; padding: 28px; border: 0; border-radius: 16px; background: #edf1f2; min-height: 155px; }
+    .work-link span { display: none; }
+    .work-link strong { font: 500 17px/1.5 sans-serif; letter-spacing: 0; }
+    .work-link em { color: #81909a; font: 9px var(--mono); letter-spacing: .5px; }
+    .work-link b { position: absolute; right: 22px; bottom: 22px; display: grid; place-items: center; width: 30px; height: 30px; background: #fff; border-radius: 50%; font-size: 16px; }
+    .work-link:hover { background: #e4eaed; color: #202a30; padding-inline: 28px; }
+    .work-link:first-child { background: #f6e5de; }
+    #data-in-practice .section-heading h2 { grid-column: 2; grid-row: 1; justify-self: end; text-align: right; }
+    #data-in-practice .section-heading > div { grid-column: 1; grid-row: 1; }
+    #contact .section-heading { display: flex; flex-direction: column; align-items: center; gap: 22px; text-align: center; }
+    #contact .section-heading h2 { max-width: 100%; }
+    #contact .section-heading > div { width: 100%; }
+    #contact .section-intro { max-width: none; margin: 0 auto; }
+    @media (max-width: 760px) {
+      #data-in-practice .section-heading h2 { grid-column: 1; grid-row: 1; }
+      #data-in-practice .section-heading > div { grid-column: 1; grid-row: 2; }
+      .next, .content-section { padding: 64px 24px; }
+      .section-heading { grid-template-columns: 1fr; gap: 22px; }
+      .next h2, .content-section h2 { font-size: 28px; max-width: 400px; }
+      .paths, .data-grid, .open-grid, .team-grid, .work-list { grid-template-columns: 1fr; margin-top: 36px; }
+      .path, .data-card, .open-group, .path:first-child, .data-card:first-child, .open-group:first-child, .path:last-child, .data-card:last-child, .open-group:last-child { padding: 28px 0; }
+      .path + .path, .data-card + .data-card, .open-group + .open-group { border-left: 0; border-top: 1px solid #e3e7e7; }
+      .team-grid { gap: 36px; }
+      .work-link { min-height: 130px; }
+    }
+
+    @media (max-width: 760px) {
+      .path, .data-card, .open-group, .path:first-child, .data-card:first-child, .open-group:first-child, .path:last-child, .data-card:last-child, .open-group:last-child { padding: 24px; }
+    }
+    /* Final chapter treatment: centered headers and transparent line illustrations. */
+    .section-heading { display: flex; flex-direction: column; align-items: center; gap: 22px; text-align: center; }
+    .section-heading h2 { max-width: 860px; }
+    .section-heading > div { width: 100%; }
+    .section-heading .section-intro { max-width: 760px; margin: 0 auto; }
+    #data-in-practice .section-heading h2, #data-in-practice .section-heading > div { grid-column: auto; grid-row: auto; justify-self: auto; text-align: center; }
+    .paths, .data-grid, .open-grid { gap: 18px; }
+    .path, .data-card, .open-group { min-height: 270px; padding: 28px; border: 1px solid #e0e4e5; border-radius: 14px; background: #fff; }
+    .path:first-child, .data-card:first-child, .open-group:first-child, .path:last-child, .data-card:last-child, .open-group:last-child { padding-left: 28px; padding-right: 28px; }
+    .path + .path, .data-card + .data-card, .open-group + .open-group { border-left: 1px solid #e0e4e5; }
+    .motif, .data-card .motif { width: 110px; height: 80px; padding: 0; border-radius: 0; background: transparent; }
+    .data-card .motif { width: 150px; height: 100px; }
+    .path strong, .data-card h3, .open-group h3 { margin-top: 24px; color: #171d21; font-size: 18px; }
+    .path p, .data-card p, .open-group > p { color: #737c82; }
+    .open-group { min-height: 410px; }
+    .section-dark .open-group, .section-dark .project strong { background: #fff; color: #26353e; }
+    .section-dark .open-group { background: #fff; }
+    .open-actions { display: flex; justify-content: center; margin-top: 42px; }
+    .open-actions a { display: inline-flex; align-items: center; justify-content: space-between; gap: 14px; min-width: 106px; padding: 9px 10px 9px 13px; border-radius: 8px; background: var(--accent); color: #160c08; font-size: 12px; }
+    .open-actions a span { display: grid; place-items: center; width: 20px; height: 20px; border-radius: 4px; background: rgba(255,255,255,.82); color: #171d21; font-size: 14px; line-height: 1; }
+    #data-in-practice .section-actions { justify-content: center; align-items: center; margin-top: 42px; gap: 18px; }
+    #data-in-practice .section-actions a { display: inline-flex; align-items: center; gap: 24px; min-width: 176px; justify-content: space-between; padding: 14px 16px 14px 22px; border: 0; border-radius: 8px; font-size: 16px; }
+    #data-in-practice .section-actions a:first-child { background: var(--accent); color: #160c08; }
+    #data-in-practice .section-actions a:last-child { background: #171d21; color: #fff; }
+    #data-in-practice .section-actions a span { display: grid; place-items: center; width: 28px; height: 28px; border-radius: 5px; background: rgba(255,255,255,.82); color: #171d21; font-size: 18px; line-height: 1; }
+    #data-in-practice .section-actions a:last-child span { background: #fff; }
+    #data-in-practice .section-actions a { min-width: 106px; gap: 14px; padding: 9px 10px 9px 13px; font-size: 12px; }
+    #data-in-practice .section-actions a span { width: 20px; height: 20px; border-radius: 4px; font-size: 14px; }
+    @media (max-width: 760px) {
+      .path, .data-card, .open-group, .path:first-child, .data-card:first-child, .open-group:first-child, .path:last-child, .data-card:last-child, .open-group:last-child { padding: 24px; }
+      .path + .path, .data-card + .data-card, .open-group + .open-group { border-left: 0; border-top: 1px solid #e0e4e5; }
+    }
+  </style>
 </head>
-<body data-page="home">
-  <a class="skip" href="#main" data-i18n="skip">跳转至内容</a>
-  <header class="header"><div class="wrap header-inner">
-    <a href="#home" class="brand" aria-label="DataVerse home"><svg class="brand-mark" width="28" height="28" viewBox="0 0 28 28" aria-hidden="true"><path d="M4 4h9v9H4zM15 4h9v9h-9zM4 15h9v9H4z" fill="currentColor"/><path d="M15 15h9v9h-9z" fill="#dd603f"/></svg><span>DataVerse<span class="brand-dot">.</span></span></a>
-    <nav class="nav" aria-label="主导航" data-i18n-aria="navLabel"><a href="index.html" class="current" aria-current="page" data-i18n="navHome">首页</a><a href="datasets.html" data-i18n="navData">数据样本</a><a href="#team" data-i18n="navTeam">团队</a><a href="#contact" data-i18n="navContact">联系我们</a></nav>
-    <button class="language" type="button" aria-label="Switch to English"><span class="lang-zh selected">中</span><span class="language-divider">/</span><span class="lang-en">EN</span></button>
-  </div></header>
-  <main id="main">
-    <section id="home" class="hero wrap">
-      <div class="hero-copy"><p class="eyebrow"><span class="status-dot"></span>DATA-CENTRIC. POSSIBILITY-DRIVEN.</p>
-        <h1 data-i18n-html="heroTitle">让数据成为<br>智能的<span class="accent">起点</span><span class="hero-period">.</span></h1>
-        <p class="hero-english" data-i18n="heroSub">Better data. Greater intelligence.</p>
-        <div class="small-rule"></div>
-        <p class="hero-description" data-i18n="heroDescription">我们相信，下一代人工智能的突破，始于对数据的理解。让分散的信息沉淀为知识，让高质量数据连接真实世界与智能系统。</p>
-        <div class="hero-actions"><a class="text-link hero-link" href="#approach"><span data-i18n="heroCta">探索我们的方向</span><span aria-hidden="true">↗</span></a><a class="text-link" href="datasets.html"><span data-i18n="dataBrowse">浏览全部样本</span><span aria-hidden="true">↗</span></a></div>
+<body>
+  <section class="hero" id="home">
+    <nav class="nav" aria-label="主导航">
+      <a class="brand" href="#home" aria-label="DataVerse 首页">
+        <span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+        <span>DataVerse<span class="brand-dot">.</span></span>
+      </a>
+      <div class="nav-links">
+        <a href="#home">首页</a>
+        <a href="datasets.html">数据样本</a>
+        <a href="#what-we-do">解决方案</a>
+        <a href="#team">研究</a>
+        <a href="#open-source">资源</a>
       </div>
-      <div class="universe" role="img" aria-label="从分散的数据点到有序的知识结构" data-i18n-aria="universeLabel">
-        <svg id="data-universe" viewBox="0 0 520 500" aria-hidden="true"><defs><radialGradient id="halo"><stop stop-color="#fff3ea" stop-opacity=".9"/><stop offset="1" stop-color="#ffffff" stop-opacity="0"/></radialGradient></defs><circle cx="270" cy="240" r="230" fill="url(#halo)"/><g class="orbit-lines" fill="none" stroke="#d7e1ea" stroke-width=".65"><ellipse cx="268" cy="244" rx="176" ry="176"/><ellipse cx="268" cy="244" rx="176" ry="67" transform="rotate(-35 268 244)"/><ellipse cx="268" cy="244" rx="176" ry="67" transform="rotate(35 268 244)"/><ellipse cx="268" cy="244" rx="67" ry="176"/></g><g id="universe-lines"></g><g id="universe-points"></g><g class="universe-center"><rect x="252" y="228" width="32" height="32" rx="2" fill="#17212b"/><path d="M260 236h7v7h-7zm9 0h7v7h-7zm-9 9h7v7h-7z" fill="#ffffff"/><path d="M269 245h7v7h-7z" fill="#e98a6e"/></g><g class="graphic-label" font-family="monospace" font-size="9" fill="#788173"><text x="48" y="87">RAW DATA</text><text x="355" y="408">NEW POSSIBILITIES</text><path d="M50 100h45M370 386h50" stroke="#a8afa1" stroke-width=".7"/></g></svg>
-        <div class="universe-caption"><span>DATA → KNOWLEDGE → INTELLIGENCE</span><span class="graphic-index">FIG. 01</span></div>
+      <div class="nav-actions"><a class="contact-link" href="#contact">联系我们</a></div>
+    </nav>
+
+    <div class="hero-inner">
+      <div class="copy">
+        <p class="eyebrow">DATA-CENTRIC. POSSIBILITY-DRIVEN.</p>
+        <h1><span>AI 的下一次突破</span><span>始于<span class="accent-word">更好</span>的数据</span></h1>
+        <p class="hero-tagline">Data that makes intelligence work.</p>
+        <p class="lead">DataVerse 以数据为中心，致力于为模型理解、推理与行动构建数据基础<span>我们将真实任务中的知识、过程与反馈，转化为高质量 AI-Ready 数据</span></p>
+        <div class="actions">
+          <a class="primary" href="datasets.html">探索数据 <span aria-hidden="true">›</span></a>
+        </div>
       </div>
-    </section>
-    <section class="belief wrap" aria-labelledby="belief-title"><div class="section-index">01 / <span data-i18n="beliefLabel">我们的信念</span></div><div class="belief-body"><h2 id="belief-title">DataVerse<span class="accent">.</span> <span class="pronunciation">/ˈdeɪtə vɜːrs/</span></h2><p><span class="dictionary-n">n.</span> <span data-i18n-html="beliefText"><strong>数据的宇宙。</strong> 每一个数据点，都蕴含着新的可能。我们希望让它们彼此连接，成为推动智能向前的力量。</span></p></div></section>
-    <section id="approach" class="approach section wrap"><div class="section-head"><div><p class="section-index">02 / <span data-i18n="approachLabel">我们的方向</span></p><h2 data-i18n-html="approachTitle">从数据出发，<br>走向真实世界。</h2></div><p class="section-note" data-i18n="approachNote">以数据为中心，探索贯穿信息、知识与智能的完整路径。</p></div>
-      <div class="direction-list">
-        <article class="direction"><span class="direction-number">01</span><div class="direction-main"><h3 data-i18n="directionOne">高质量数据</h3><span class="mono-label">HIGH-QUALITY DATA</span></div><p data-i18n="directionOneText">关注数据的质量、结构与价值，探索面向模型训练和应用的数据构建方法。</p><span class="direction-symbol" aria-hidden="true">∷</span></article>
-        <article class="direction"><span class="direction-number">02</span><div class="direction-main"><h3 data-i18n="directionTwo">数据与知识系统</h3><span class="mono-label">DATA & KNOWLEDGE SYSTEMS</span></div><p data-i18n="directionTwoText">连接分散的信息与领域知识，探索可复用、可扩展的数据基础设施。</p><span class="direction-symbol" aria-hidden="true">⌘</span></article>
-        <article class="direction"><span class="direction-number">03</span><div class="direction-main"><h3 data-i18n="directionThree">面向应用的智能</h3><span class="mono-label">REAL-WORLD INTELLIGENCE</span></div><p data-i18n="directionThreeText">从真实问题出发，探索数据与智能系统如何共同创造实际价值。</p><span class="direction-symbol" aria-hidden="true">↗</span></article>
+    </div>
+
+    <div class="universe" aria-hidden="true">
+      <svg id="universe-svg" viewBox="0 0 1000 1000">
+        <defs>
+          <radialGradient id="core-glow"><stop stop-color="#dcebf3" stop-opacity=".15"/><stop offset="1" stop-color="#07090b" stop-opacity="0"/></radialGradient>
+        </defs>
+        <circle cx="500" cy="500" r="315" fill="url(#core-glow)"/>
+        <g class="orbit orbit-a"><ellipse cx="500" cy="500" rx="390" ry="390"/><ellipse cx="500" cy="500" rx="390" ry="136" transform="rotate(-31 500 500)"/></g>
+        <g class="orbit orbit-b"><ellipse cx="500" cy="500" rx="390" ry="136" transform="rotate(36 500 500)"/><ellipse cx="500" cy="500" rx="145" ry="390" transform="rotate(9 500 500)"/></g>
+        <g class="orbit orbit-c"><ellipse cx="500" cy="500" rx="300" ry="410" transform="rotate(66 500 500)"/></g>
+        <g id="network-lines"></g>
+        <g id="nodes"></g>
+      </svg>
+    </div>
+
+    <div class="figure-label raw">RAW SIGNALS</div>
+    <div class="figure-label possibility">NEW POSSIBILITIES</div>
+    <div class="figure-caption"><span>DATA → STRUCTURE → KNOWLEDGE → INTELLIGENCE</span><span>FIG. 01</span></div>
+    <div class="scroll-cue">SCROLL TO EXPLORE</div>
+  </section>
+
+  <section class="next" id="what-we-do">
+    <div class="section-heading"><h2>AI + Data，让数据真正<span class="accent-word">可用</span></h2><div><p class="section-intro">DataVerse 构建面向模型训练、评测与应用的高质量数据，将真实任务中的知识、过程与反馈，转化为可学习、可验证的数据资产</p></div></div>
+    <div class="paths">
+      <div class="path"><svg class="motif" viewBox="0 0 120 80" fill="none" stroke="currentColor" stroke-width="1.2" aria-hidden="true"><path d="M20 29 58 11 96 29 58 47Z"/><path d="m20 40 38 18 38-18M20 51l38 18 38-18"/><path class="accent" d="m43 28 11 7 20-13"/><circle cx="96" cy="51" r="3" class="fill"/></svg><strong>高质量数据</strong><p>关注数据的质量、结构与价值，探索面向模型训练和应用的数据构建方法</p><b>↗</b></div>
+      <div class="path"><svg class="motif" viewBox="0 0 120 80" fill="none" stroke="currentColor" stroke-width="1.2" aria-hidden="true"><ellipse cx="58" cy="40" rx="43" ry="24"/><ellipse cx="58" cy="40" rx="19" ry="34" transform="rotate(38 58 40)"/><path d="M22 27 58 40 89 57M58 40 75 12"/><circle cx="58" cy="40" r="5" class="fill"/><circle cx="22" cy="27" r="4" fill="#8296a3"/><circle cx="89" cy="57" r="4" fill="#8296a3"/></svg><strong>数据与知识系统</strong><p>连接分散的信息与领域知识，探索可复用、可扩展的数据基础设施</p><b>↗</b></div>
+      <div class="path"><svg class="motif" viewBox="0 0 120 80" fill="none" stroke="currentColor" stroke-width="1.2" aria-hidden="true"><rect x="23" y="15" width="68" height="46" rx="6"/><path d="M43 71h28M57 61v10M34 39h13l8-12 12 23 8-11h7"/><circle cx="91" cy="15" r="5" class="fill"/></svg><strong>面向应用的智能</strong><p>从场景需求出发，探索数据与智能系统如何共同创造实际价值</p></div>
+    </div>
+  </section>
+
+  <section class="content-section section-light" id="data-in-practice">
+    <div class="section-heading"><h2>数据质量清晰<span class="accent-word">可见</span></h2><div><p class="section-intro">从完整的数据样本到可复现的评测结果，全链路观测数据如何被构建，以及它如何转化为模型能力</p></div></div>
+    <div class="data-grid">
+      <article class="data-card">
+        <span class="card-number">MULTIMODAL EDITING</span>
+        <h3>多模态编辑数据</h3>
+        <p>记录原始内容、编辑指令、生成结果与不变约束，让模型学习准确修改</p>
+        <div class="card-visual"><svg class="motif" viewBox="0 0 120 80" fill="none" stroke="currentColor" stroke-width="1.2" aria-hidden="true"><rect x="9" y="17" width="44" height="46" rx="5"/><rect x="67" y="17" width="44" height="46" rx="5"/><path d="m14 53 13-17 10 10 11-8M72 53l13-17 10 10 11-8"/><circle cx="40" cy="29" r="4"/><circle cx="98" cy="29" r="4" class="fill"/><path class="accent" d="M56 40h8m-3-3 3 3-3 3"/></svg></div>
+      </article>
+      <article class="data-card">
+        <span class="card-number">AGENT TRAJECTORIES</span>
+        <h3>智能体工具轨迹</h3>
+        <p>记录智能体观察环境、调用工具、修改内容与验证结果的完整过程</p>
+        <div class="card-visual"><svg class="motif" viewBox="0 0 120 80" fill="none" stroke="currentColor" stroke-width="1.2" aria-hidden="true"><path d="M16 25h41a12 12 0 0 1 0 24H40a12 12 0 0 0 0 24h59"/><circle cx="16" cy="25" r="5" fill="#fafbf9"/><circle cx="55" cy="25" r="5" fill="#fafbf9"/><circle cx="40" cy="49" r="5" fill="#fafbf9"/><circle cx="99" cy="73" r="6" class="fill"/><path class="accent" d="m88 15 5 5 10-11"/></svg></div>
+      </article>
+      <article class="data-card">
+        <span class="card-number">BENCHMARK RESULTS</span>
+        <h3>综合评测结果</h3>
+        <p>通过公开、可复现的评测，验证数据与方法带来的能力变化</p>
+        <div class="card-visual"><svg class="motif" viewBox="0 0 120 80" fill="none" stroke="currentColor" stroke-width="1.2" aria-hidden="true"><circle cx="58" cy="40" r="29"/><path d="M58 6v7M58 67v7M24 40h7M85 40h7M35 17l5 5M77 58l5 5"/><path class="accent" d="m45 40 9 9 19-20"/><circle cx="89" cy="40" r="3" class="fill"/></svg></div>
+      </article>
+    </div>
+    <div class="section-actions"><a href="datasets.html">更多数据 <span aria-hidden="true">↗</span></a><a href="#team">更多评测 <span aria-hidden="true">↗</span></a></div>
+
+  </section>
+
+  <section class="content-section section-dark" id="open-source">
+    <div class="section-heading"><h2>数据价值持续<span class="accent-word">生长</span></h2><div><p class="section-intro">围绕数据处理、数据消费、知识构建与模型评测，持续建设可复用的开源基础设施</p></div></div>
+    <div class="open-grid">
+      <article class="open-group">
+        <svg class="motif" viewBox="0 0 120 80" fill="none" stroke="currentColor" stroke-width="1.2" aria-hidden="true"><path d="M20 29 58 11 96 29 58 47Z"/><path d="m20 40 38 18 38-18M20 51l38 18 38-18"/><path class="accent" d="m43 28 11 7 20-13"/><circle cx="96" cy="51" r="3" class="fill"/></svg>
+        <h3>数据基础设施</h3>
+        <p>处理数据从进入系统到形成知识的完整过程</p>
+        <div class="project-list">
+          <a class="project" href="https://github.com/OpenDCAI/DataFlow" target="_blank" rel="noopener noreferrer"><strong>DataFlow <span>↗</span></strong><small>大模型数据处理、清洗与流转基础设施</small></a>
+          <a class="project" href="https://github.com/OpenDCAI/DataFlex" target="_blank" rel="noopener noreferrer"><strong>DataFlex <span>↗</span></strong><small>面向高质量数据构建的数据治理与处理工具</small></a>
+          <a class="project" href="https://github.com/OpenDCAI/DataMind" target="_blank" rel="noopener noreferrer"><strong>DataMind <span>↗</span></strong><small>将文件、实体和关系组织为可检索知识与智能体上下文</small></a>
+        </div>
+      </article>
+      <article class="open-group">
+        <svg class="motif" viewBox="0 0 120 80" fill="none" stroke="currentColor" stroke-width="1.2" aria-hidden="true"><path d="M18 61V29l20-12 20 12v32M58 61V29l22-12 22 12v32M18 61h84"/><path class="accent" d="M27 49h22M67 49h24M27 40h12M67 40h15"/><circle cx="98" cy="17" r="4" class="fill"/></svg>
+        <h3>数据集与评测</h3>
+        <p>用于衡量模型在推理、代码、数据处理和智能体任务中的真实能力</p>
+        <div class="project-list">
+          <a class="project" href="https://github.com/haolpku/MathDebugger" target="_blank" rel="noopener noreferrer"><strong>MathDebugger <span>↗</span></strong><small>纯文本数学数据质检基准数据集</small></a>
+          <a class="project" href="https://github.com/haolpku/WorkSurface-Bench" target="_blank" rel="noopener noreferrer"><strong>WorkSurface-Bench <span>↗</span></strong><small>面向企业 Agent 的多数据入口评测</small></a>
+          <a class="project" href="https://github.com/OpenDCAI/Data-Preparation-Bench" target="_blank" rel="noopener noreferrer"><strong>DataPrep-Bench <span>↗</span></strong><small>AI 数据准备能力评测</small></a>
+        </div>
+      </article>
+      <article class="open-group">
+        <svg class="motif" viewBox="0 0 120 80" fill="none" stroke="currentColor" stroke-width="1.2" aria-hidden="true"><ellipse cx="58" cy="40" rx="43" ry="24"/><ellipse cx="58" cy="40" rx="19" ry="34" transform="rotate(38 58 40)"/><path d="M22 27 58 40 89 57M58 40 75 12"/><circle cx="58" cy="40" r="5" class="fill"/><circle cx="22" cy="27" r="4" fill="#8296a3"/><circle cx="89" cy="57" r="4" fill="#8296a3"/></svg>
+        <h3>模型与应用</h3>
+        <p>建立在数据能力之上的模型和垂直场景项目</p>
+        <div class="project-list">
+          <a class="project" href="https://github.com/haolpku/Omni-Edu" target="_blank" rel="noopener noreferrer"><strong>OmniEdu <span>↗</span></strong><small>面向教育场景的开放大模型与研究项目</small></a>
+          <a class="project" href="https://github.com/haolpku/K12-KGraph" target="_blank" rel="noopener noreferrer"><strong>K12-KGraph <span>↗</span></strong><small>覆盖小初高数理化生四大学科的课程知识图谱</small></a>
+          <a class="project" href="https://github.com/OpenDCAI/GameFactory-3A" target="_blank" rel="noopener noreferrer"><strong>3AGameFactory <span>↗</span></strong><small>面向 Coding Agent 的 3A 游戏生成 Skill 与资产框架</small></a>
+        </div>
+      </article>
+    </div>
+    <div class="open-actions"><a href="https://github.com/OpenDCAI" target="_blank" rel="noopener noreferrer">更多项目 <span aria-hidden="true">↗</span></a></div>
+  </section>
+
+  <section class="content-section section-light" id="team">
+    <div class="section-heading"><h2>以前沿研究构建<span class="accent-word">真实</span>智能</h2><div><p class="section-intro team-intro">DataVerse 汇聚人工智能与数据系统领域的研究者和工程师<br>将前沿研究、开源实践与工程验证结合，推进模型能力走向更复杂的真实场景</p></div></div>
+    <div class="team-grid">
+      <article class="person-row"><div class="person-visual photo"><img src="assets/zhang-wentao.png" alt="张文涛" /></div><div><h3>张文涛</h3><p>北京大学助理教授，Data-Centric AI Group 负责人研究方向涵盖以数据为中心的人工智能、大模型数据系统与 AI4Science</p><a href="https://zwt233.github.io/" target="_blank" rel="noopener noreferrer">研究主页 ↗</a></div></article>
+      <article class="person-row"><div class="person-visual">WX</div><div><h3>王雪</h3></div></article>
+    </div>
+  </section>
+
+  <section class="content-section section-soft" id="contact">
+    <div class="section-heading"><h2>下一次对话，从<span class="accent-word">更好</span>的数据开始</h2><div><p class="section-intro">无论是构建训练数据、设计评测任务，还是探索数据与 AI 的研究方向，我们期待从真实问题出发，共同定义解决方案</p></div></div>
+    <div class="work-list">
+      <a class="work-link" href="#contact"><span>01</span><strong>讨论数据需求</strong><em>DATA PARTNERSHIPS</em><b>↗</b></a>
+      <a class="work-link" href="#contact"><span>02</span><strong>发起研究合作</strong><em>RESEARCH COLLABORATION</em><b>↗</b></a>
+      <a class="work-link" href="#contact"><span>03</span><strong>查看开放机会</strong><em>JOIN THE TEAM</em><b>↗</b></a>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="footer-main">
+      <div class="footer-brand">
+        <a class="brand" href="#home" aria-label="DataVerse 首页">
+          <span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+          <span>DataVerse<span class="brand-dot">.</span></span>
+        </a>
+        <p>让数据成为智能的起点</p>
       </div>
-    </section>
-    <section id="team" class="team section wrap"><div class="section-head"><div><p class="section-index">03 / <span data-i18n="teamLabel">我们的团队</span></p><h2 data-i18n="teamTitle">让想法，成为可能。</h2></div><p class="section-note" data-i18n="teamNote">对数据的好奇，对智能的探索。从这里，开始共同构建。</p></div>
-      <div class="team-grid"><article class="person"><div class="portrait"><img src="assets/wentao.jpg" width="600" height="600" loading="lazy" alt="张文涛" data-i18n-alt="wentaoName"><span class="portrait-index">01</span></div><div class="person-info"><p class="mono-label">WENTAO ZHANG</p><h3 data-i18n="wentaoName">张文涛</h3><p class="person-bio" data-i18n="wentaoBio">北京大学助理教授，Data-Centric AI Group 负责人。研究方向涵盖以数据为中心的人工智能、大模型数据系统与 AI4Science。</p><a href="https://zwt233.github.io/" target="_blank" rel="noopener noreferrer" class="text-link"><span data-i18n="personalSite">个人主页</span><span aria-hidden="true">↗</span></a></div></article>
-      <article class="person"><div class="portrait portrait-placeholder" aria-hidden="true"><span class="portrait-monogram">WX<span class="accent">.</span></span><span class="portrait-index">02</span><span class="portrait-word">DATA / PEOPLE / POSSIBILITIES</span></div><div class="person-info"><p class="mono-label">XUE WANG</p><h3 data-i18n="wangName">王雪</h3></div></article></div>
-    </section>
-    <section id="contact" class="contact"><div class="wrap contact-inner"><p class="section-index">04 / <span data-i18n="contactLabel">与我们连接</span></p><div class="contact-row"><div><h2 data-i18n-html="contactTitle">下一个可能，<br>从一次对话开始<span class="accent">.</span></h2><p data-i18n="contactText">交流数据与 AI 的想法，探索研究与合作的可能。</p></div><a href="https://zwt233.github.io/" target="_blank" rel="noopener noreferrer" class="contact-link"><span data-i18n="contactCta">通过张文涛主页联系</span><span class="contact-arrow" aria-hidden="true">↗</span></a></div></div></section>
-  </main>
-  <footer class="footer wrap"><div class="footer-top"><a class="brand footer-brand" href="#home">DataVerse<span class="brand-dot">.</span></a><a class="back-top" href="#home"><span data-i18n="backTop">返回顶部</span> ↑</a></div><div class="footer-bottom"><span>© <span id="year">2026</span> <span data-i18n="legalName">上海数元衍宇智能科技有限公司</span></span><span class="footer-motto">A UNIVERSE OF DATA. A WORLD OF POSSIBILITY.</span></div></footer>
+      <nav class="footer-column" aria-label="公司">
+        <h3>公司</h3>
+        <a href="#team">关于我们</a>
+        <a href="#contact">联系我们</a>
+      </nav>
+      <nav class="footer-column" aria-label="开源">
+        <h3>开源</h3>
+        <a href="https://github.com/OpenDCAI/DataFlow" target="_blank" rel="noopener noreferrer">DataFlow</a>
+        <a href="https://github.com/OpenDCAI/DataFlex" target="_blank" rel="noopener noreferrer">DataFlex</a>
+        <a href="https://github.com/OpenDCAI/DataMind" target="_blank" rel="noopener noreferrer">DataMind</a>
+        <a href="https://github.com/haolpku/Omni-Edu" target="_blank" rel="noopener noreferrer">OmniEdu</a>
+        <a href="https://github.com/OpenDCAI/GameFactory-3A" target="_blank" rel="noopener noreferrer">3AGameFactory</a>
+      </nav>
+      <nav class="footer-column" aria-label="解决方案">
+        <h3>解决方案</h3>
+        <a href="#what-we-do">金融</a>
+        <a href="#what-we-do">教育</a>
+        <a href="#what-we-do">工业</a>
+        <a href="#what-we-do">AI4Science</a>
+      </nav>
+      <nav class="footer-column" aria-label="资源">
+        <h3>资源</h3>
+        <span class="footer-link">博客</span>
+        <span class="footer-link">公众号</span>
+        <a href="https://space.bilibili.com/3546929239689711" target="_blank" rel="noopener noreferrer">B站</a>
+        <a href="https://www.xiaohongshu.com/user/profile/6864c663000000001e004508" target="_blank" rel="noopener noreferrer">小红书</a>
+        <a href="https://x.com/PKU_DCAI" target="_blank" rel="noopener noreferrer">X</a>
+      </nav>
+    </div>
+    <div class="footer-bottom"><span>© 2026 上海数元衍宇智能科技有限公司</span><span>A UNIVERSE OF DATA. A WORLD OF POSSIBILITY.</span></div>
+  </footer>
+
+  <script>
+    (() => {
+      const NS = 'http://www.w3.org/2000/svg';
+      const nodesGroup = document.getElementById('nodes');
+      const linesGroup = document.getElementById('network-lines');
+      const points = [];
+      let seed = 42;
+      const random = () => { seed = (seed * 16807) % 2147483647; return (seed - 1) / 2147483646; };
+      const count = window.innerWidth < 700 ? 64 : 112;
+
+      for (let i = 0; i < count; i++) {
+        const angle = random() * Math.PI * 2;
+        const radius = 110 + Math.sqrt(random()) * 300;
+        const x = 500 + Math.cos(angle) * radius;
+        const y = 500 + Math.sin(angle) * radius * .94;
+        const hot = i % 19 === 0;
+        const point = { x, y, hot };
+        points.push(point);
+        const circle = document.createElementNS(NS, 'circle');
+        circle.setAttribute('cx', x);
+        circle.setAttribute('cy', y);
+        circle.setAttribute('r', hot ? 4.2 : i % 7 === 0 ? 2.8 : 1.7);
+        circle.setAttribute('opacity', hot ? '.94' : i % 3 === 0 ? '.72' : '.42');
+        circle.setAttribute('class', `node${hot ? ' hot pulse' : i % 9 === 0 ? ' pulse' : ''}`);
+        circle.style.animationDelay = `${random() * -6}s`;
+        nodesGroup.appendChild(circle);
+      }
+
+      points.forEach((p, i) => {
+        let links = 0;
+        for (let j = i + 1; j < points.length && links < 4; j++) {
+          const q = points[j];
+          const distance = Math.hypot(p.x - q.x, p.y - q.y);
+          if (distance > 34 && distance < 94) {
+            const line = document.createElementNS(NS, 'line');
+            line.setAttribute('x1', p.x); line.setAttribute('y1', p.y);
+            line.setAttribute('x2', q.x); line.setAttribute('y2', q.y);
+            line.setAttribute('class', 'network-line');
+            line.style.animationDelay = `${.4 + random() * 1.4}s`;
+            linesGroup.appendChild(line);
+            links++;
+          }
+        }
+      });
+
+      if (!matchMedia('(prefers-reduced-motion: reduce)').matches && matchMedia('(pointer:fine)').matches) {
+        const universe = document.querySelector('.universe');
+        window.addEventListener('pointermove', event => {
+          const dx = (event.clientX / innerWidth - .5) * 13;
+          const dy = (event.clientY / innerHeight - .5) * 9;
+          universe.style.marginRight = `${dx}px`;
+          universe.style.marginTop = `${dy}px`;
+        }, { passive: true });
+      }
+    })();
+  </script>
 </body>
 </html>
