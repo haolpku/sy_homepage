@@ -3,7 +3,17 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>DataVerse Hero Concept</title>
+  <title>DataVerse · 高质量 AI 数据与智能体任务</title>
+  <meta name="description" content="DataVerse 数元衍宇，提供 Coding/SWE、法律、工业、Autoresearch、办公、游戏、Lean 与 RSI-SWE 数据，连接任务环境、智能体过程、多模态产物与验证反馈。">
+  <meta name="theme-color" content="#07090b">
+  <link rel="icon" href="assets/mark.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="products.css?v=5041c712eca9">
+  <link rel="stylesheet" href="product-records.css?v=4baf5d2128c7">
+  <script src="products-data.js?v=477c2c4130b0" defer></script>
+  <script src="product-excerpts.js?v=ea957d815ba5" defer></script>
+  <script src="product-examples.js?v=fa117185a252" defer></script>
+  <script src="product-records.js?v=ab7d7808048f" defer></script>
+  <script src="products.js?v=ada514ed1eb2" defer></script>
   <style>
     :root {
       color-scheme: dark;
@@ -418,6 +428,7 @@
   </style>
 </head>
 <body>
+  <a class="skip-to-content" href="#data-in-practice">跳转至数据产品</a>
   <section class="hero" id="home">
     <nav class="nav" aria-label="主导航">
       <a class="brand" href="#home" aria-label="DataVerse 首页">
@@ -426,7 +437,8 @@
       </a>
       <div class="nav-links">
         <a href="#home">首页</a>
-        <a href="datasets.html">数据样本</a>
+        <a href="#data-in-practice">数据产品</a>
+        <a href="datasets.html">样本库</a>
         <a href="#what-we-do">解决方案</a>
         <a href="#team">研究</a>
         <a href="#open-source">资源</a>
@@ -441,7 +453,7 @@
         <p class="hero-tagline">Data that makes intelligence work.</p>
         <p class="lead">DataVerse 以数据为中心，致力于为模型理解、推理与行动构建数据基础<span>我们将真实任务中的知识、过程与反馈，转化为高质量 AI-Ready 数据</span></p>
         <div class="actions">
-          <a class="primary" href="datasets.html">探索数据 <span aria-hidden="true">›</span></a>
+          <a class="primary" href="#data-in-practice">探索数据产品 <span aria-hidden="true">›</span></a>
         </div>
       </div>
     </div>
@@ -475,30 +487,37 @@
     </div>
   </section>
 
-  <section class="content-section section-light" id="data-in-practice">
-    <div class="section-heading"><h2>数据质量清晰<span class="accent-word">可见</span></h2><div><p class="section-intro">从完整的数据样本到可复现的评测结果，全链路观测数据如何被构建，以及它如何转化为模型能力</p></div></div>
-    <div class="data-grid">
-      <article class="data-card">
-        <span class="card-number">MULTIMODAL EDITING</span>
-        <h3>多模态编辑数据</h3>
-        <p>记录原始内容、编辑指令、生成结果与不变约束，让模型学习准确修改</p>
-        <div class="card-visual"><svg class="motif" viewBox="0 0 120 80" fill="none" stroke="currentColor" stroke-width="1.2" aria-hidden="true"><rect x="9" y="17" width="44" height="46" rx="5"/><rect x="67" y="17" width="44" height="46" rx="5"/><path d="m14 53 13-17 10 10 11-8M72 53l13-17 10 10 11-8"/><circle cx="40" cy="29" r="4"/><circle cx="98" cy="29" r="4" class="fill"/><path class="accent" d="M56 40h8m-3-3 3 3-3 3"/></svg></div>
-      </article>
-      <article class="data-card">
-        <span class="card-number">AGENT TRAJECTORIES</span>
-        <h3>智能体工具轨迹</h3>
-        <p>记录智能体观察环境、调用工具、修改内容与验证结果的完整过程</p>
-        <div class="card-visual"><svg class="motif" viewBox="0 0 120 80" fill="none" stroke="currentColor" stroke-width="1.2" aria-hidden="true"><path d="M16 25h41a12 12 0 0 1 0 24H40a12 12 0 0 0 0 24h59"/><circle cx="16" cy="25" r="5" fill="#fafbf9"/><circle cx="55" cy="25" r="5" fill="#fafbf9"/><circle cx="40" cy="49" r="5" fill="#fafbf9"/><circle cx="99" cy="73" r="6" class="fill"/><path class="accent" d="m88 15 5 5 10-11"/></svg></div>
-      </article>
-      <article class="data-card">
-        <span class="card-number">BENCHMARK RESULTS</span>
-        <h3>综合评测结果</h3>
-        <p>通过公开、可复现的评测，验证数据与方法带来的能力变化</p>
-        <div class="card-visual"><svg class="motif" viewBox="0 0 120 80" fill="none" stroke="currentColor" stroke-width="1.2" aria-hidden="true"><circle cx="58" cy="40" r="29"/><path d="M58 6v7M58 67v7M24 40h7M85 40h7M35 17l5 5M77 58l5 5"/><path class="accent" d="m45 40 9 9 19-20"/><circle cx="89" cy="40" r="3" class="fill"/></svg></div>
-      </article>
+  <section class="portfolio" id="data-in-practice" aria-labelledby="portfolio-title">
+    <div class="portfolio-heading">
+      <div><p class="portfolio-eyebrow">DATA PORTFOLIO / 面向真实任务的数据</p><h2 id="portfolio-title">面向真实任务，<br>可交付的<em>AI 数据。</em></h2></div>
+      <div><p class="portfolio-intro">从软件工程到三维世界，持续拓展专业领域。<br>任务、环境、过程、产物与验证，让每一类数据都有具体的交付形态。</p><div class="portfolio-count"><strong>DOMAIN DATA</strong><span>训练 · 评测 · 定制交付</span></div></div>
     </div>
-    <div class="section-actions"><a href="datasets.html">更多数据 <span aria-hidden="true">↗</span></a><a href="#team">更多评测 <span aria-hidden="true">↗</span></a></div>
-
+    <div class="product-navigation">
+    <div class="product-tabs" role="tablist" aria-label="选择数据产线">
+      <button class="product-tab" type="button" role="tab" id="product-tab-coding" data-product="coding" aria-controls="product-panel" aria-selected="false" tabindex="-1"><span>01</span>Coding / SWE</button>
+      <button class="product-tab" type="button" role="tab" id="product-tab-legal" data-product="legal" aria-controls="product-panel" aria-selected="false" tabindex="-1"><span>02</span>法律</button>
+      <button class="product-tab" type="button" role="tab" id="product-tab-industrial" data-product="industrial" aria-controls="product-panel" aria-selected="false" tabindex="-1"><span>03</span>工业</button>
+      <button class="product-tab" type="button" role="tab" id="product-tab-research" data-product="research" aria-controls="product-panel" aria-selected="false" tabindex="-1"><span>04</span>Autoresearch</button>
+      <button class="product-tab" type="button" role="tab" id="product-tab-office" data-product="office" aria-controls="product-panel" aria-selected="false" tabindex="-1"><span>05</span>Office 办公</button>
+      <button class="product-tab" type="button" role="tab" id="product-tab-game" data-product="game" aria-controls="product-panel" aria-selected="true" tabindex="0"><span>06</span>游戏</button>
+      <button class="product-tab" type="button" role="tab" id="product-tab-lean" data-product="lean" aria-controls="product-panel" aria-selected="false" tabindex="-1"><span>07</span>Lean 数学</button>
+      <button class="product-tab" type="button" role="tab" id="product-tab-rsi" data-product="rsi" aria-controls="product-panel" aria-selected="false" tabindex="-1"><span>08</span>RSI-SWE</button>
+    </div>
+    <a class="product-more" href="#contact" aria-label="More，联系咨询更多数据类型"><span>+</span>More <b aria-hidden="true">↗</b></a>
+    </div>
+    <div class="product-stage" id="product-panel" role="tabpanel" aria-labelledby="product-tab-game"></div>
+    <p class="portfolio-sr" id="product-selection-status" role="status" aria-live="polite"></p>
+    <div class="portfolio-footnote"><span>展示为交付样例，数据规模、领域难度与交付范围按需求确定。</span><a href="datasets.html">浏览公开数据样本库 ↗</a></div>
+    <div class="portfolio-related" aria-label="更多真实样例">
+      <button class="related-sample" type="button" data-related="office"><div class="related-picture"><img src="assets/products/office-analysis.jpg" width="1334" height="750" loading="lazy" alt="办公采购参考成品中的真实费用分析页"></div><div class="related-caption"><strong>多源材料 → 办公成品</strong><span aria-hidden="true">↗</span></div><small class="related-note">OFFICE / 让交付结果清晰可见</small></button>
+      <button class="related-sample" type="button" data-related="research"><div class="related-picture related-research"><img src="assets/products/research-pipeline.png" width="1536" height="1024" loading="lazy" alt="Autoresearch 样例产出的原始研究方法图"></div><div class="related-caption"><strong>研究想法 → 实验与论文</strong><span aria-hidden="true">↗</span></div><small class="related-note">AUTORESEARCH / 从过程到产物</small></button>
+      <button class="related-sample" type="button" data-related="lean"><div class="related-picture related-lean"><span>HDP / MAIN.LEAN / SOURCE EXCERPT</span><pre><b>theorem</b> reverse_chernoff_binomial
+    (N : ℕ)
+    (μ : ℝ)
+    (hN : 0 &lt; N)</pre></div><div class="related-caption"><strong>数学陈述 → 形式化证明</strong><span aria-hidden="true">↗</span></div><small class="related-note">LEAN / 以机器验证连接数学与模型</small></button>
+    </div>
+    <noscript><p>我们提供 Coding/SWE、法律、工业、Autoresearch、Office 办公、游戏、Lean 数学与 RSI-SWE 八类数据样例。请启用 JavaScript 查看各类交付内容与交互素材，或浏览<a href="datasets.html">公开数据样本库</a>。</p></noscript>
+    <dialog class="portfolio-dialog" id="product-image-dialog" aria-label="原始样例图片"><div class="portfolio-dialog-top"><p></p><button type="button" aria-label="关闭图片预览">关闭 ×</button></div><img alt=""></dialog>
   </section>
 
   <section class="content-section section-dark" id="open-source">

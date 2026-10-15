@@ -5,6 +5,12 @@
   "description": "DataVerse bilingual company homepage",
   "scripts": {
     "dev": "python3 -m http.server 4173 --directory dist --bind 127.0.0.1",
-    "check": "node scripts/check.mjs"
+    "check": "node scripts/check.mjs",
+    "build:showcase": "node scripts/build-showcase.mjs"
+  },
+  "devDependencies": {
+    "esbuild": "0.28.2",
+    "occt-import-js": "0.0.23",
+    "three": "0.186.1"
   }
 }
