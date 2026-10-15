@@ -61,14 +61,16 @@
     let animationPaused = false;
     let visible = true;
     let playing = !matchMedia('(prefers-reduced-motion: reduce)').matches;
+    let researchElapsed = 0;
+    const researchDuration = 6500;
     function updateResearch(index) {
       host.dataset.step = index;
       host.querySelectorAll('[data-auto-step]').forEach(button=>button.setAttribute('aria-pressed', Number(button.dataset.autoStep)===index));
       host.querySelector('.record-body').innerHTML = researchBody(index);
       host.querySelector('[data-process-status]').textContent = `研究回放：${examples.research[index].name}`;
       const progress = host.querySelector('.auto-progress span');
-      progress.style.animation = 'none';
-      requestAnimationFrame(()=>{ if (!signal.aborted) progress.style.animation = ''; });
+      researchElapsed = 0;
+      progress.style.transform = 'scaleX(0)';
     }
     function updatePlaying() {
       host.dataset.playing = playing;
@@ -88,11 +90,23 @@
       updatePlaying();
       observer = new IntersectionObserver(([entry])=>{ visible=entry.isIntersecting; });
       observer.observe(host);
-      const timer = setInterval(()=>{
-        if (signal.aborted || !playing || !visible || document.hidden) return;
-        updateResearch((Number(host.dataset.step)+1)%examples.research.length);
-      },6500);
-      signal.addEventListener('abort',()=>{ clearInterval(timer); observer.disconnect(); },{once:true});
+      const progress = host.querySelector('.auto-progress span');
+      let previousTime;
+      let frame;
+      function replay(now) {
+        if (signal.aborted) return;
+        const elapsed = previousTime === undefined ? 0 : Math.min(now-previousTime, 250);
+        previousTime = now;
+        // One clock owns both the bar and stage changes, including visibility pauses.
+        if (playing && visible && !document.hidden) {
+          researchElapsed += elapsed;
+          if (researchElapsed >= researchDuration) updateResearch((Number(host.dataset.step)+1)%examples.research.length);
+          progress.style.transform = `scaleX(${researchElapsed/researchDuration})`;
+        }
+        frame = requestAnimationFrame(replay);
+      }
+      frame = requestAnimationFrame(replay);
+      signal.addEventListener('abort',()=>{ cancelAnimationFrame(frame); observer.disconnect(); },{once:true});
     }
     if (type === 'industrial') {
       observer = new IntersectionObserver(async entries=>{

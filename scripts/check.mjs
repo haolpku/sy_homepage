@@ -75,4 +75,5 @@ assert.equal(Math.max(...excerpts.rsi.map(x=>x.reward)), .6);
 assert.ok(excerpts.lean.includes('theorem reverse_chernoff_binomial'));
 assert.ok(excerpts.industrial_vertices.length > 0 && excerpts.industrial_edges.length > 0);
 assert.ok(existsSync('dist/assets/products/THREE-LICENSE.txt'));
+await import('./check-research-replay.mjs');
 console.log(`Passed: bilingual copy, local links, JavaScript, ${library.items.length} public samples, ${provenance.assets.length} existing images, 8 product lines, and ${productProvenance.assets.length} unchanged delivery assets.`);
