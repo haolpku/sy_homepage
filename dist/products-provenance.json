@@ -1,0 +1,126 @@
+{
+  "source": "User-provided production-line demo deliveries, organized 2026-10-14",
+  "scope": "Selected display assets and excerpts; not the full data repository",
+  "assets": [
+    {
+      "path": "assets/products/sanctuary.glb",
+      "source_path": "游戏/providing_data/assets/scene/sanctuary.glb",
+      "sha256": "0686df305426f9a3b834bbaea50dd1471055cde7bbada042628287b3a341cc2c",
+      "transformation": "None; byte-for-byte copy"
+    },
+    {
+      "path": "assets/products/dragon.glb",
+      "source_path": "游戏/providing_data/assets/models/dragon.glb",
+      "sha256": "6fc2ff4acbb3c1e9d4754ee3fe7fd754de25b6b39aeaf9ea8784ec1132e38f59",
+      "transformation": "None; byte-for-byte copy"
+    },
+    {
+      "path": "assets/products/office-cover.jpg",
+      "source_path": "office办公/ZCloud-通用办公-001-20261010-轨迹报告/office-furniture-procurement-pilot-001/golden/renders/slide-01.jpg",
+      "sha256": "16b68671ad0f83d9c498a6148132f74c0d7808f734cacf107ff5688f256e0bfb",
+      "transformation": "None; byte-for-byte copy"
+    },
+    {
+      "path": "assets/products/office-evidence.jpg",
+      "source_path": "office办公/ZCloud-通用办公-001-20261010-轨迹报告/office-furniture-procurement-pilot-001/golden/renders/slide-03.jpg",
+      "sha256": "817e546cf1f740297741fbc7a48f298e6c4b0f3560d5fc46a44bb0b5505d98dd",
+      "transformation": "None; byte-for-byte copy"
+    },
+    {
+      "path": "assets/products/office-analysis.jpg",
+      "source_path": "office办公/ZCloud-通用办公-001-20261010-轨迹报告/office-furniture-procurement-pilot-001/golden/renders/slide-09.jpg",
+      "sha256": "3f12442d88a32d9b95901bbae7bfdeff2650a21f8c1ccb7aa6ada707b2bda6a9",
+      "transformation": "None; byte-for-byte copy"
+    },
+    {
+      "path": "assets/products/research-pipeline.png",
+      "source_path": "Autoresearch/autoresearch_sample_run41fcb57b/figures/pipeline.png",
+      "sha256": "0414e243b0bb71d0065e55c6fe985537396bae5638378c66247c01be43eb7fec",
+      "transformation": "None; byte-for-byte copy"
+    }
+  ],
+  "excerpts": [
+    {
+      "id": "lean",
+      "source_path": "Lean/hdp-showcase-20261013/samples/items-2.12/Main.lean",
+      "lines": [
+        65,
+        81
+      ],
+      "transformation": "Excerpt, unchanged"
+    },
+    {
+      "id": "rsi",
+      "source_path": "RSI-SWE/task_rsi_harness_evolution/reference/evaluation_history_reference_run.json",
+      "fields": [
+        "history[].iteration",
+        "history[].reward"
+      ],
+      "transformation": "Selected fields only; paths, identifiers and trial logs omitted"
+    },
+    {
+      "id": "industrial",
+      "source_path": "工业/harbor-industrial-software-20261013-r2/tasks/industrial/interface_release_r5/environment/workspace/incoming/export_17.step",
+      "transformation": "Extract VERTEX_POINT coordinates and EDGE_CURVE endpoint pairs; project them for a wireframe preview. Curved edges displayed as endpoint chords. Not FEM simulation."
+    }
+  ],
+  "example_sources": [
+    {
+      "source_path": "法律/harbor-legal-20261013-r2/tasks/legal/pr13-menu-replan/instruction.md",
+      "sha256": "ade12cf4b9bd539aec6de47e32d490dc6fa24244834c4ad2bbf2c0c106fdbe25"
+    },
+    {
+      "source_path": "法律/harbor-legal-20261013-r2/tasks/legal/pr13-menu-replan/environment/workspace/HANDOFF.md",
+      "sha256": "5069333252ef13cf34485a87b106a9328616541040f491565a0e06fe6e471f31"
+    },
+    {
+      "source_path": "法律/harbor-legal-20261013-r2/tasks/legal/pr13-menu-replan/environment/workspace/operations/customer_instruments/PR13_continuity_menu.docx",
+      "sha256": "1273399e7f4bb36db4c8e0f26ffd9a4e652b6e38cc72cc9fa41d1036f0fd335f"
+    },
+    {
+      "source_path": "Autoresearch/autoresearch_sample_run41fcb57b/stage1_problem/limitations.json",
+      "sha256": "5349dab6c4f9951c6e49ddb93aa3edec9d37fe519e89627164b52a06c9ebc6ac"
+    },
+    {
+      "source_path": "Autoresearch/autoresearch_sample_run41fcb57b/stage2_refinement/round3/winner.json",
+      "sha256": "70b1d220a2526e51812fec239cc1dc78de4ed255090d31e9aa8413e9af09d361"
+    },
+    {
+      "source_path": "Autoresearch/autoresearch_sample_run41fcb57b/stage3_ablation/ablation_results.json",
+      "sha256": "0e3b9cacdcc966d83fddc69da875f244b051eb3f1067ab19a0400a92916169c3"
+    },
+    {
+      "source_path": "Autoresearch/autoresearch_sample_run41fcb57b/stage4_paper/stage_meta.json",
+      "sha256": "a216ad1b7c3f61f9ff8aa78c85cd2ec4d4bae081911dddf8b55bf82ef7df88d8"
+    },
+    {
+      "source_path": "Autoresearch/autoresearch_sample_run41fcb57b/stage5_metareview/verdict.json",
+      "sha256": "6a504286e5c62a773fa0478e3a93a49e5aa599ae9ecf581a466718f0db0cc254"
+    },
+    {
+      "source_path": "RSI-SWE/task_rsi_harness_evolution/traces/reference_run_traces.json",
+      "sha256": "2dda9cb622d2c2087d48c068375b74b7b26f73ce9e1b5a27131afe90e43a8fc9"
+    },
+    {
+      "source_path": "RSI-SWE/task_rsi_harness_evolution/data/initial_harness.py",
+      "sha256": "b6364c7b687f3a50f92619c24e8d400d3efd102daf47b4fbe5a200e7e9039ec0"
+    },
+    {
+      "source_path": "RSI-SWE/task_rsi_harness_evolution/reference/best-harness-iter7.py",
+      "sha256": "97e69b86a0cf1b5a4d4acd43153401d96c0d387f2423551dc399b165ace6bbf0"
+    }
+  ],
+  "example_transformation": "Selected source fields and verbatim excerpts. Legal record/output interface are a display adaptation, not a fabricated model answer. Research reflection explicitly truncates its reasoning excerpt. RSI repository labels normalize IDs; initial code is the starting scaffold, not the iteration-1 output.",
+  "example_asset": {
+    "path": "product-examples.js",
+    "sha256": "fa117185a252c83b471b73a5f05547cf383c006fb4af06a48965ef9d4fc99f34"
+  },
+  "industrial_model": {
+    "path": "assets/products/industrial-model.json",
+    "source_path": "工业/harbor-industrial-software-20261013-r2/tasks/industrial/interface_release_r5/environment/workspace/incoming/export_17.step",
+    "source_sha256": "ea2e9effd7e0e7dedca259e881f30f8afd00a7e84cc08b08673714ca8cbccbd1",
+    "sha256": "f25c97bc461357d213a4586df604a7e1713908dbc5381986c28ac6031ca784da",
+    "transformation": "Original single machined solid, tessellated and partitioned by source BREP face geometry for an exploded-view illustration. Display regions are not separately manufactured source components.",
+    "converter": "occt-import-js 0.0.23; local build only, no WASM shipped to browser"
+  }
+}
