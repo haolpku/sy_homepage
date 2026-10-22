@@ -37,6 +37,13 @@
       "source_path": "Autoresearch/autoresearch_sample_run41fcb57b/figures/pipeline.png",
       "sha256": "0414e243b0bb71d0065e55c6fe985537396bae5638378c66247c01be43eb7fec",
       "transformation": "None; byte-for-byte copy"
+    },
+    {
+      "path": "assets/products/chartvqa-forest.png",
+      "source_path": "chartvqa_30/sample.html #sample-2",
+      "source_archive": "chartvqa_30.zip",
+      "sha256": "e9dc84564044c7733433dec39eff009edcd7200f4c45076363bd3182b91b6432",
+      "transformation": "PNG payload decoded from sample #2 HTML image; original image bytes unchanged."
     }
   ],
   "excerpts": [
@@ -122,5 +129,11 @@
     "sha256": "f25c97bc461357d213a4586df604a7e1713908dbc5381986c28ac6031ca784da",
     "transformation": "Original single machined solid, tessellated and partitioned by source BREP face geometry for an exploded-view illustration. Display regions are not separately manufactured source components.",
     "converter": "occt-import-js 0.0.23; local build only, no WASM shipped to browser"
+  },
+  "chartvqa_example": {
+    "path": "product-chartvqa-data.js",
+    "sha256": "56cf98a8f1e104da53af60cc95200ab99f2c41d5155795df4c859b2676ddb5dc",
+    "source_path": "chartvqa_30/sample.html #sample-2",
+    "transformation": "Question, Oracle, Response and CoT copied verbatim from HTML. readings transcribed from printed chart labels; Chinese steps are a presentation adaptation, not original model reasoning."
   }
 }

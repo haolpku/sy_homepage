@@ -9,7 +9,7 @@
 .portfolio-intro { max-width: 410px; margin: 0; font-size: 13px; line-height: 1.95; color: #718089; }
 .portfolio-count { margin-top: 18px; display: flex; align-items: baseline; gap: 12px; color: #8d999d; font: 10px var(--mono); }
 .portfolio-count strong { font-size: 22px; font-weight: 400; color: #34444d; }
-.product-tabs { display: grid; grid-template-columns: repeat(8, minmax(0, 1fr)); gap: 0; border-bottom: 1px solid #dce2e1; margin-bottom: 28px; }
+.product-tabs { display: grid; grid-template-columns: repeat(9, minmax(0, 1fr)); gap: 0; border-bottom: 1px solid #dce2e1; margin-bottom: 28px; }
 .product-tab { position: relative; display: flex; flex-direction: column; align-items: flex-start; gap: 9px; border: 0; background: transparent; color: #66757c; cursor: pointer; padding: 16px 12px 19px; font: 12px var(--sans); text-align: left; transition: background .2s, color .2s; }
 .product-tab:first-child { padding-left: 0; }
 .product-tab span { font: 9px var(--mono); color: #9aa5a8; }

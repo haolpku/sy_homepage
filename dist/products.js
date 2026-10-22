@@ -16,6 +16,7 @@
     return `<div class="code-window-bar"><i></i><i></i><i></i><span>${escape(name)}</span></div>`;
   }
   function artifact(product) {
+    if (product.type === 'chartvqa') return window.chartVqaView.render();
     if (['legal', 'industrial', 'research', 'rsi'].includes(product.type)) return window.productRecordViews.render(product.type);
     if (product.type === 'game') return `<div class="artifact-view game-view"><div class="game-controls" aria-label="选择三维素材"><button type="button" data-game="scene" aria-pressed="true">浮空圣域</button><button type="button" data-game="dragon" aria-pressed="false">角色素材</button></div><div class="game-scene"></div><div class="game-loading" role="status"><span aria-hidden="true"></span>正在载入原始三维素材</div><span class="game-help">拖动 / 方向键旋转 · 原始 GLB</span></div>`;
     if (product.type === 'office') return `<div class="artifact-view office-view"><div class="artifact-controls" aria-label="选择参考成品页面"><button type="button" data-slide="cover" aria-pressed="true">成品封面</button><button type="button" data-slide="evidence" aria-pressed="false">材料证据</button><button type="button" data-slide="analysis" aria-pressed="false">费用分析</button></div><button type="button" class="artifact-zoom" data-zoom aria-label="放大办公采购参考成品"><img src="assets/products/office-cover.jpg" alt="真实参考成品：办公家具采购比选与审批建议" width="1334" height="750"></button></div>`;
@@ -46,6 +47,7 @@
     if (focus) tabs.find(tab=>tab.dataset.product===id).focus();
     if (scroll) root.scrollIntoView({ behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'instant' : 'smooth', block: 'start' });
     window.productRecordViews.mount(panel, product.type, signal);
+    if (product.type === 'chartvqa') window.chartVqaView.mount(panel, signal);
     if (id === 'game') {
       const host = panel.querySelector('.game-scene');
       loadObserver = new IntersectionObserver(entries => {
@@ -115,5 +117,6 @@
   dialog.addEventListener('click', event => { if (event.target === dialog) { const r = dialog.getBoundingClientRect(); if (event.clientX < r.left || event.clientX > r.right || event.clientY < r.top || event.clientY > r.bottom) dialog.close(); } });
   window.addEventListener('pagehide', ()=>{ controller?.abort(); loadObserver?.disconnect(); });
   window.addEventListener('pageshow', event=>{ if (event.persisted) select(active); });
-  select('game');
+  const requested = new URLSearchParams(location.search).get('product');
+  select(products.some(product => product.id === requested) ? requested : 'game');
 })();

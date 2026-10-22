@@ -1,4 +1,4 @@
-/* Curated product descriptions based on the eight user-provided demo deliveries. */
+/* Curated product descriptions based on the user-provided demo deliveries. */
 window.dataProducts = [
   {
     id: 'coding', name: 'Coding / SWE', label: 'CODING & SOFTWARE ENGINEERING',
@@ -79,5 +79,15 @@ window.dataProducts = [
     contents: ['初始代码与任务环境', '迭代代码与奖励反馈', '参考轨迹与 grader'],
     use: '自我改进训练 / 元学习 / Agent 策略优化',
     caption: '改进记录、代码片段与评测反馈的真实节选', type: 'rsi',
+  },
+  {
+    id: 'chartvqa', name: '图文 / ChartVQA', label: 'VISUAL UNDERSTANDING & REASONING',
+    title: '看懂多张图，\n算出一个答案。',
+    description: '从图表里的数值与标签出发，跨面板关联同一实体，完成多步计算、比较与排序。关联原始图像、题目、推理与参考答案，让图文训练数据清晰可见。',
+    formats: ['图像 + 问答', '推理轨迹', '结构化答案'], count: '精选样例',
+    example: 'ChartVQA · 森林调查与跨图推理',
+    contents: ['原始图像与问题', '原始推理与回答', '参考答案与多步计算'],
+    use: '多模态模型训练 / 图表理解 / 跨图推理',
+    caption: '原始三面板图与问答 · 分步演示据图整理', type: 'chartvqa',
   },
 ];

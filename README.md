@@ -16,7 +16,7 @@ npm run check
 
 ## 内容与样式
 
-- `dist/index.html`：页面结构、中文内容，以及首页 8 个产线的数据产品展厅。
+- `dist/index.html`：页面结构、中文内容，以及首页 9 个产线的数据产品展厅。
 - `dist/content.js`：中文和英文文案。语言选择保存在访问者的本地浏览器中。
 - `dist/styles.css`：响应式样式及减少动态效果的偏好支持。
 - `dist/app.js`：语言切换、导航状态和轻量 SVG 数据图。
@@ -26,10 +26,11 @@ npm run check
 
 ## 数据产品展厅
 
-首页业务介绍之后展示 Coding/SWE、法律、工业、Autoresearch、Office 办公、游戏、Lean 数学与 RSI-SWE。每个产线以精选样例展示用途、数据格式和交付内容；More 入口直达联系区域。
+首页业务介绍之后展示 Coding/SWE、法律、工业、Autoresearch、Office 办公、游戏、Lean 数学、RSI-SWE 与图文 / ChartVQA。每个产线以精选样例展示用途、数据格式和交付内容；More 入口直达联系区域。
 
-- `dist/products-data.js`：8 个产线的介绍与交付信息。
+- `dist/products-data.js`：9 个产线的介绍与交付信息。
 - `dist/products.js` / `products.css`：可用方向键切换的产线展厅、原始图片放大与办公成品页面切换。
+- `dist/product-chartvqa.js` / `product-chartvqa.css` / `product-chartvqa-data.js`：新增图文产线，内嵌单个森林调查真实样例，支持证据定位、读图/对齐/计算/答案切换与原始字段展开。计算使用图中标注值，展示步骤不冒充原始轨迹。
 - `dist/product-excerpts.js`：Lean 定理节选、RSI 参考运行奖励与 STEP 几何摘要。
 - `dist/product-examples.js`：法律任务/证据/输出接口、Autoresearch 五阶段真实运行节选、RSI 改进记录/代码/评测反馈。
 - `dist/product-records.js` / `product-records.css`：样例内容切换、自动研究流程回放、工业三维分区动画。
@@ -70,7 +71,7 @@ Sites 私有预览的部署配置存放在 `.openai/hosting.json`。GitHub Actio
 
 ## 数据样本迁移
 
-公开数据样本位于独立的 `datasets.html` 页面。首页导航的“样本库”与展厅下方链接打开该页；“数据产品”导航及首屏 CTA 进入首页的 8 产线交付展厅。独立页原有单轮图像拖动对比、多轮编辑逐步浏览、文本/SQL/代码阅读、Coding Agent 工具轨迹展开及单条 JSON 下载功能保留。
+公开数据样本位于独立的 `datasets.html` 页面。首页导航的“样本库”与展厅下方链接打开该页；“数据产品”导航及首屏 CTA 进入首页的 9 产线交付展厅。独立页原有单轮图像拖动对比、多轮编辑逐步浏览、文本/SQL/代码阅读、Coding Agent 工具轨迹展开及单条 JSON 下载功能保留。
 
 迁移来源为 [OpenDCAI_Data](https://github.com/haolpku/OpenDCAI_Data)，固定版本 `7cd08ea8c830d304b63130c5303c39ae80cc251e`。这是**展示样本迁移**，不是全量训练语料迁移。当前文件实际包含的展示样本数与原 README 的每类 100+ 条描述不同，本站仅显示实际迁入数量。
 
