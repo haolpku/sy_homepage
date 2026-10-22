@@ -1,0 +1,61 @@
+/* Embedded ninth product, scoped to the existing homepage exhibit. */
+.product-tab[data-product="chartvqa"] { white-space: nowrap; font-size: 11px; }
+.vqa-view { display: block; background: #111e26; min-height: 470px; }
+.vqa-question { padding: 18px 23px; border-bottom: 1px solid #2a3b44; }
+.vqa-question > span { font: 8px var(--mono); color: #738d9b; letter-spacing: .7px; }
+.vqa-question h4 { font-size: 13px; line-height: 1.85; font-weight: 400; color: #ccdadc; margin: 7px 0 0; }
+.vqa-workspace { display: grid; grid-template-columns: 1.1fr 1fr; align-items: stretch; }
+.vqa-image { background: transparent; padding: 22px 12px 22px 22px; display: flex; flex-direction: column; justify-content: center; min-width: 0; }
+.vqa-image-inner { position: relative; width: 100%; border: 1px solid #53616a; border-radius: 6px; overflow: hidden; background: #faf9f3; box-shadow: 0 8px 24px #050c1455; }
+.vqa-zoom { padding: 0; background: none; border: 0; cursor: zoom-in; display: block; width: 100%; }
+.vqa-zoom img { width: 100%; height: auto; display: block; }
+.vqa-focus { position: absolute; pointer-events: none; border: 2px solid #d08158; background: #d88b4e10; opacity: 0; transition: opacity .2s; border-radius: 2px; }
+.vqa-focus-A { left: 6%; top: 11%; width: 49%; height: 85%; }
+.vqa-focus-B { left: 59%; top: 11%; width: 38%; height: 41%; }
+.vqa-focus-C { left: 59%; top: 56%; width: 38%; height: 38%; }
+.vqa-highlight { opacity: 1; }
+.vqa-image-hint { font-size: 8px; color: #819aa8; text-align: right; padding: 12px 2px 0; }
+.vqa-process { padding: 19px 17px 15px; min-width: 0; display: flex; flex-direction: column; }
+.vqa-replay { display: flex; align-items: center; justify-content: space-between; gap: 6px; }
+.vqa-replay > span { color: #6e8a99; font: 7px var(--mono); letter-spacing: .2px; }
+.vqa-replay button { font: 8px var(--sans); border: 1px solid #354c59; background: transparent; color: #b4c6cd; padding: 6px 7px; border-radius: 3px; white-space: nowrap; }
+.vqa-steps { display: grid; grid-template-columns: repeat(4,minmax(0,1fr)); margin: 17px 0 8px; }
+.vqa-steps button { border: 0; background: none; color: #7b95a3; font: 10px var(--sans); text-align: left; padding: 5px 0; }
+.vqa-steps button span { display: block; color: #547380; font: 8px var(--mono); margin-bottom: 7px; }
+.vqa-steps button[aria-pressed="true"], .vqa-steps button[aria-pressed="true"] span { color: #e8aa83; }
+.vqa-progress { height: 2px; background: #263d49; margin-bottom: 20px; }
+.vqa-progress span { display: block; height: 100%; background: #dc976d; width: 0; }
+.vqa-body { min-height: 285px; }
+.vqa-body h4 { color: #d5e0e0; font-size: 14px; font-weight: 400; margin: 0 0 10px; line-height: 1.65; }
+.vqa-body > p { color: #7894a1; font-size: 10px; line-height: 1.9; margin: 0 0 15px; }
+.vqa-evidence { display: grid; gap: 8px; }
+.vqa-evidence button { display: grid; grid-template-columns: 22px 1fr auto; align-items: center; gap: 8px; text-align: left; background: #172a35; border: 1px solid #2a4352; color: #a7bec8; padding: 12px 9px; border-radius: 3px; font-size: 10px; }
+.vqa-evidence button[aria-pressed="true"] { border-color: #d78d61; background: #24363c; }
+.vqa-evidence b { font: 17px var(--mono); font-weight: 400; color: #dfa57f; }
+.vqa-evidence small { display: block; font: 8px var(--mono); color: #678591; margin-top: 6px; }
+.vqa-evidence em { font: 8px var(--mono); color: #819da9; font-style: normal; }
+.vqa-body table { width: 100%; border-collapse: collapse; font: 8px/1.8 var(--mono); color: #bdd0d5; text-align: right; }
+.vqa-body th { color: #6b8b9b; font-weight: 400; border-bottom: 1px solid #36515d; padding: 7px 2px; font-size: 7px; }
+.vqa-body td { padding: 8px 2px; border-bottom: 1px solid #233d4b; }
+.vqa-body td:first-child, .vqa-body th:first-child { text-align: left; }
+.vqa-formula { font: 10px/1.8 var(--mono); color: #ebb28a; padding: 10px; background: #1c3442; border-left: 2px solid #c7825b; margin-bottom: 16px; }
+.vqa-formula span { font-size: 8px; color: #6f919f; margin-left: 7px; }
+.vqa-ranking { display: grid; gap: 13px; }
+.vqa-ranking > div { display: grid; grid-template-columns: 12px 59px 1fr 36px; gap: 5px; align-items: center; font: 8px var(--mono); color: #b3cbd4; }
+.vqa-ranking small { font-size: 7px; color: #537b8d; }
+.vqa-ranking i { background: #223f50; height: 5px; }
+.vqa-ranking b { display: block; height: 100%; background: #8cafb5; }
+.vqa-ranking > div:first-child b { background: #e2a980; }
+.vqa-ranking strong { text-align: right; font-weight: 400; }
+.vqa-answer { font: 9px/1.9 var(--mono); color: #b8d4c4; padding: 12px; margin: 0 0 12px; border: 1px solid #284958; background: #0d1b24; white-space: pre-wrap; overflow-wrap: anywhere; }
+.vqa-verified { color: #80aa94; font-size: 8px; }
+.vqa-editorial { font-size: 7px; color: #557d8e; line-height: 1.8; margin-top: auto; padding-top: 15px; }
+.vqa-original { padding: 0 23px; border-top: 1px solid #293e4b; }
+.vqa-original details + details { border-top: 1px solid #233c4b; }
+.vqa-original summary { padding: 14px 0; color: #9cb6c3; font-size: 9px; cursor: pointer; }
+.vqa-original summary span { font: 7px var(--mono); color: #537687; margin-left: 10px; }
+.vqa-original pre, .vqa-source-question { white-space: pre-wrap; overflow-wrap: anywhere; font: 9px/1.9 var(--mono); color: #89a9bb; }
+.vqa-original pre { max-height: 220px; overflow: auto; padding: 0 5px 16px; }
+@media(max-width:1100px) and (min-width:681px) { .vqa-workspace { grid-template-columns: 1fr; } .vqa-image-inner { max-width: 440px; margin: auto; } .vqa-process { padding: 20px; } .vqa-body { min-height: 275px; } .vqa-body table { font-size: 10px; } }
+@media(max-width:950px) { .product-navigation .product-tabs { grid-template-columns: repeat(3,minmax(0,1fr)); } }
+@media(max-width:680px) { .product-navigation .product-tabs { grid-template-columns: repeat(3,minmax(0,1fr)); } .vqa-workspace { grid-template-columns: 1fr; } .vqa-question { padding: 18px; } .vqa-question h4 { font-size: 12px; } .vqa-image { padding: 20px 18px; } .vqa-process { padding: 23px 20px; } .vqa-body { min-height: 290px; } .vqa-body h4 { font-size: 17px; } .vqa-body > p { font-size: 11px; } .vqa-replay > span { font-size: 8px; } .vqa-evidence button { padding: 14px 12px; font-size: 11px; } .vqa-body table { font-size: 10px; } .vqa-body th { font-size: 8px; } .vqa-body td { padding: 10px 3px; } .vqa-ranking > div { font-size: 10px; grid-template-columns: 18px 70px 1fr 42px; } .vqa-answer { font-size: 11px; } .vqa-verified { font-size: 9px; } .vqa-original pre { font-size: 10px; } .vqa-original { padding: 0 20px; } }
